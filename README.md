@@ -81,7 +81,7 @@ Business Questions to Answer
 Using your data models, answer the following:
 
 Client Lifetime Value (LTV)
-What are the lifetime value (LTV), i.e. the accumulated fees, at 1, 3 and 6 months for each client, measured from the client’s first fee date?
+What are the lifetime value (LTV), i.e. the accumulated fees, at 1, 3 and 6 months for each client
 
 ⸻
 Cohort LTV
