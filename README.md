@@ -216,6 +216,15 @@ Following tables have been created with this pipeline.
     
   * mart table is unique at client_id and fee_date grain.   
 
+**Analytical queries**
+
+As part of the task I have created following 3 queries to answer business questions asked in the task under /analytics folder.
+
+- client_quarterly_ltv.sql
+  
+- cohort_jan_feb_6months.sql
+  
+- adviser_performance_6months.sql
   
 **Diagram**
 
