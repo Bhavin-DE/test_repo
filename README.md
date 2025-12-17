@@ -218,6 +218,7 @@ Following tables have been created with this pipeline.
 
   
 **Diagram**
+
 This diagram shows our approach about how we are processing data from csv to target.
 
 <img width="1468" height="557" alt="Screenshot 2025-12-17 at 16 55 58" src="https://github.com/user-attachments/assets/6a759011-3c12-4334-b791-70cb883ed575" />
