@@ -195,8 +195,28 @@ I am using sql scripts for data manipulation during each stage. SQL files are pl
   
 - staging_to_transformed: This references to staging_to_transformed_v2 scheduled query for processing data from staging to transformed layer. It checks if staging is refreshed, remove duplicate rows, data cleaning, aggregation and deriving new fields. It holds the whole history at client_id and fee_date grain with upsert strategy.
   
-- transformed_to_mart.sql: Thsi references to trasnformed_to_mart_v2 scheduled query for processing data from transformed to mart layer. It reads whole transformed table and create ltv fields which will be used for LTV analysis by end users. 
+- transformed_to_mart.sql: Thsi references to trasnformed_to_mart_v2 scheduled query for processing data from transformed to mart layer. It reads whole transformed table and create ltv fields which will be used for LTV analysis by end users.
 
+**Output tables **
+
+Following tables have been created with this pipeline.
+
+- heroic-footing-446621-d9.raw.fees
+  
+- heroic-footing-446621-d9.staging.fees_staging
+  
+- heroic-footing-446621-d9.transformed.fees_transformed
+  
+- heroic-footing-446621-d9.mart.fees_mart:
+  * month_since_first_payment: For mart, we have created a field called month_since_first_payment where 0 represents 1st payment month, 1 represents if client paid in following (2nd)| month, 2 represents if client paid in 3rd month and onwards. If they don't miss a month to pay then they will have a gap in numbers for month_since_first_payment.
+    
+  * client_fee_amount_cumulative: rolling sum of client's fee payment over fee months
+    
+  * adviser_fee_amount_cumulative: rolling sum of adviser's associated with client's payments. If a client has 1 advisor for 4 months and different adviser for next 2 months, adviser 1 will get rolling sum of 4 months and adviser 2 will get rolling sum of 2 months. So LTV associated for a particular client for adviser 1 will be 4th month value, while for adviser 2 it will be 2nd month value.
+    
+  * mart table is unique at client_id and fee_date grain.   
+
+  
 **Diagram**
 This diagram shows our approach about how we are processing data from csv to target.
 
@@ -221,7 +241,6 @@ I have covered following for data quality and monitoring perspective due to limi
 - Push changes to Github
   
 - After successful push, create schedule queries manually using sql files we pushed.
-
 
 **Advantages of this design**
 
